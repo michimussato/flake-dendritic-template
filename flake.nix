@@ -6,16 +6,33 @@
   description = "Dendritic Flake Template";
 
   inputs = {
+
+    # Latest stable nixpkgs
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-26.05";
     };
+
+    # Unstable nixpkgs
+    nixpkgs-unstable = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+
+    # Flake parts utils
     flake-parts = {
       # https://flake.parts/
       url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree = {
       # https://import-tree.denful.dev/
       url = "github:denful/import-tree";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nix Wrapper Modules
+    wrappers = {
+      url = "github:nix-community/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
